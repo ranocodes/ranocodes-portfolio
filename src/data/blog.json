@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "slug": "modern-react-patterns",
+    "title": "Modern React Patterns in 2024",
+    "excerpt": "Exploring the latest React patterns including Server Components, Suspense, and the future of state management.",
+    "fullContent": "Full article content about modern React patterns...",
+    "date": "2024-12-15",
+    "readTime": "8 min read",
+    "category": "Development",
+    "featuredImage": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80"
+  },
+  {
+    "id": "2",
+    "slug": "gsap-scroll-animations",
+    "title": "Creating Cinematic Scroll Animations with GSAP",
+    "excerpt": "A deep dive into building smooth, performant scroll-triggered animations using GSAP and ScrollTrigger.",
+    "fullContent": "Full article content about GSAP scroll animations...",
+    "date": "2024-11-28",
+    "readTime": "12 min read",
+    "category": "Animation",
+    "featuredImage": "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80"
+  },
+  {
+    "id": "3",
+    "slug": "ecommerce-performance",
+    "title": "Optimizing E-Commerce Performance",
+    "excerpt": "How to achieve sub-second page loads and boost conversion rates for online stores.",
+    "fullContent": "Full article content about e-commerce performance...",
+    "date": "2024-11-10",
+    "readTime": "10 min read",
+    "category": "Performance",
+    "featuredImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+  },
+  {
+    "id": "4",
+    "slug": "tailwind-design-systems",
+    "title": "Building Design Systems with Tailwind CSS",
+    "excerpt": "A comprehensive guide to creating scalable, consistent design systems using Tailwind CSS.",
+    "fullContent": "Full article content about Tailwind design systems...",
+    "date": "2024-10-22",
+    "readTime": "15 min read",
+    "category": "Design",
+    "featuredImage": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80"
+  },
+  {
+    "id": "5",
+    "slug": "nodejs-api-architecture",
+    "title": "Node.js API Architecture Best Practices",
+    "excerpt": "Designing scalable, maintainable APIs with Node.js, Express, and modern middleware patterns.",
+    "fullContent": "Full article content about Node.js API architecture...",
+    "date": "2024-10-05",
+    "readTime": "11 min read",
+    "category": "Backend",
+    "featuredImage": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&q=80"
+  },
+  {
+    "id": "6",
+    "slug": "accessible-web-design",
+    "title": "Web Accessibility: A Complete Guide",
+    "excerpt": "Ensuring your web applications are accessible to all users, including those with disabilities.",
+    "fullContent": "Full article content about web accessibility...",
+    "date": "2024-09-18",
+    "readTime": "14 min read",
+    "category": "Accessibility",
+    "featuredImage": "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&q=80"
+  }
+]

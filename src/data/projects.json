@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "slug": "ecommerce-platform",
+    "title": "E-Commerce Platform",
+    "overview": "A modern e-commerce solution with seamless checkout, inventory management, and analytics dashboard.",
+    "problem": "The client needed a scalable e-commerce platform that could handle high traffic and provide a smooth shopping experience.",
+    "mission": "Build a performant, conversion-optimized online store with real-time inventory sync.",
+    "solution": "Implemented a React-based storefront with Node.js backend, Stripe integration, and automated inventory management.",
+    "techStack": ["React", "Node.js", "Stripe", "PostgreSQL", "Redis"],
+    "features": ["Real-time inventory", "Multi-currency support", "Analytics dashboard", "Email automation"],
+    "screenshots": [
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+    ],
+    "results": [
+      { "metric": "Conversion Rate", "value": "+45%" },
+      { "metric": "Page Load Time", "value": "1.2s" },
+      { "metric": "Revenue Growth", "value": "+120%" }
+    ],
+    "category": "E-Commerce"
+  },
+  {
+    "id": "2",
+    "slug": "saas-dashboard",
+    "title": "SaaS Analytics Dashboard",
+    "overview": "A comprehensive analytics dashboard for tracking key business metrics and user engagement.",
+    "problem": "The startup needed actionable insights from their user data to drive product decisions.",
+    "mission": "Create an intuitive dashboard that transforms complex data into clear, actionable visualizations.",
+    "solution": "Built an interactive React dashboard with real-time data updates and customizable widgets.",
+    "techStack": ["Next.js", "D3.js", "PostgreSQL", "GraphQL"],
+    "features": ["Real-time updates", "Custom widgets", "Export reports", "Team collaboration"],
+    "screenshots": [
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+    ],
+    "results": [
+      { "metric": "User Retention", "value": "+35%" },
+      { "metric": "Data Processing", "value": "10M+ records/day" },
+      { "metric": "Report Generation", "value": "-60% time" }
+    ],
+    "category": "SaaS"
+  },
+  {
+    "id": "3",
+    "slug": "travel-booking-app",
+    "title": "Travel Booking Platform",
+    "overview": "An all-in-one travel booking platform with flight, hotel, and experience bookings.",
+    "problem": "Users needed a unified platform to compare and book travel arrangements without switching between services.",
+    "mission": "Design a seamless booking experience that simplifies travel planning.",
+    "solution": "Created a unified booking platform with real-time availability and competitive pricing.",
+    "techStack": ["React", "Python", "FastAPI", "MongoDB", "AWS"],
+    "features": ["Multi-provider search", "Price comparison", "Saved trips", "Travel guides"],
+    "screenshots": [
+      "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80"
+    ],
+    "results": [
+      { "metric": "Bookings", "value": "50K+/month" },
+      { "metric": "Search Speed", "value": "<2s" },
+      { "metric": "User Satisfaction", "value": "4.8/5" }
+    ],
+    "category": "Travel"
+  },
+  {
+    "id": "4",
+    "slug": "healthcare-portal",
+    "title": "Healthcare Patient Portal",
+    "overview": "A HIPAA-compliant patient portal for managing appointments, medical records, and telehealth.",
+    "problem": "Healthcare provider needed a secure, accessible way for patients to manage their health information.",
+    "mission": "Build a compliant, user-friendly portal that improves patient engagement.",
+    "solution": "Developed a secure React portal with video conferencing and encrypted record storage.",
+    "techStack": ["React", "Node.js", "WebRTC", "PostgreSQL", "AWS"],
+    "features": ["Video consultations", "Secure messaging", "Prescription refills", "Health records"],
+    "screenshots": [
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80"
+    ],
+    "results": [
+      { "metric": "Patient Engagement", "value": "+80%" },
+      { "metric": "Appointment No-shows", "value": "-40%" },
+      { "metric": "Patient Satisfaction", "value": "96%" }
+    ],
+    "category": "Healthcare"
+  }
+]
