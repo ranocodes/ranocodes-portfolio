@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
-import db from '../../services/database'
+import db from '../services/database'
 
 const AuthContext = createContext(null)
 
