@@ -11,8 +11,15 @@ const STORAGE_KEYS = {
 export const db = {
   blogs: {
     getAll: () => {
-      const data = localStorage.getItem(STORAGE_KEYS.BLOGS)
-      return data ? JSON.parse(data) : []
+      try {
+        const data = localStorage.getItem(STORAGE_KEYS.BLOGS)
+        if (!data || data === 'undefined' || data === 'null') return []
+        const parsed = JSON.parse(data)
+        return Array.isArray(parsed) ? parsed : []
+      } catch (err) {
+        console.error('Error fetching blogs:', err)
+        return []
+      }
     },
     getById: (id) => {
       const blogs = db.blogs.getAll()
@@ -64,8 +71,17 @@ export const db = {
 
   categories: {
     getAll: () => {
-      const data = localStorage.getItem(STORAGE_KEYS.CATEGORIES)
-      return data ? JSON.parse(data) : ['Development', 'Design', 'Animation', 'Backend', 'Frontend']
+      try {
+        const data = localStorage.getItem(STORAGE_KEYS.CATEGORIES)
+        if (!data || data === 'undefined' || data === 'null') {
+          return ['Development', 'Design', 'Animation', 'Backend', 'Frontend']
+        }
+        const parsed = JSON.parse(data)
+        return Array.isArray(parsed) ? parsed : ['Development', 'Design', 'Animation', 'Backend', 'Frontend']
+      } catch (err) {
+        console.error('Error fetching categories:', err)
+        return ['Development', 'Design', 'Animation', 'Backend', 'Frontend']
+      }
     },
     create: (category) => {
       const categories = db.categories.getAll()
@@ -96,8 +112,15 @@ export const db = {
 
   users: {
     getAll: () => {
-      const data = localStorage.getItem(STORAGE_KEYS.USERS)
-      return data ? JSON.parse(data) : []
+      try {
+        const data = localStorage.getItem(STORAGE_KEYS.USERS)
+        if (!data || data === 'undefined' || data === 'null') return []
+        const parsed = JSON.parse(data)
+        return Array.isArray(parsed) ? parsed : []
+      } catch (err) {
+        console.error('Error fetching users:', err)
+        return []
+      }
     },
     getById: (id) => {
       const users = db.users.getAll()
@@ -136,8 +159,15 @@ export const db = {
 
   inviteCodes: {
     getAll: () => {
-      const data = localStorage.getItem(STORAGE_KEYS.INVITE_CODES)
-      return data ? JSON.parse(data) : []
+      try {
+        const data = localStorage.getItem(STORAGE_KEYS.INVITE_CODES)
+        if (!data || data === 'undefined' || data === 'null') return []
+        const parsed = JSON.parse(data)
+        return Array.isArray(parsed) ? parsed : []
+      } catch (err) {
+        console.error('Error fetching invite codes:', err)
+        return []
+      }
     },
     generate: (expiresIn = null) => {
       const codes = db.inviteCodes.getAll()
@@ -182,9 +212,15 @@ export const db = {
 
   activity: {
     getAll: (limit = 50) => {
-      const data = localStorage.getItem(STORAGE_KEYS.ACTIVITY)
-      const activities = data ? JSON.parse(data) : []
-      return activities.slice(0, limit)
+      try {
+        const data = localStorage.getItem(STORAGE_KEYS.ACTIVITY)
+        if (!data || data === 'undefined' || data === 'null') return []
+        const activities = JSON.parse(data)
+        return Array.isArray(activities) ? activities.slice(0, limit) : []
+      } catch (err) {
+        console.error('Error fetching activity:', err)
+        return []
+      }
     },
     log: (action, type, itemId, itemName) => {
       const activities = db.activity.getAll(100)
@@ -200,6 +236,64 @@ export const db = {
       localStorage.setItem(STORAGE_KEYS.ACTIVITY, JSON.stringify(activities.slice(0, 100)))
     },
   },
+}
+
+// Initial Demo Data
+const INITIAL_DATA = {
+  blogs: [
+    {
+      id: uuidv4(),
+      title: 'The Future of Creative Development',
+      slug: 'future-creative-development',
+      excerpt: 'Exploring the intersection of high-fidelity design and modern front-end engineering.',
+      fullContent: '# The Future of Creative Development\n\nModern web design is more than just visuals; it\'s about the experience...',
+      category: 'Development',
+      status: 'published',
+      readTime: '5 min read',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    {
+      id: uuidv4(),
+      title: 'Minimalism in Digital Craftsmanship',
+      slug: 'minimalism-digital-craftsmanship',
+      excerpt: 'How to achieve a high-end feel with less, focusing on details that matter.',
+      fullContent: '# Minimalism in Digital Craftsmanship\n\nLess is more, but only when it\'s done right...',
+      category: 'Design',
+      status: 'published',
+      readTime: '4 min read',
+      createdAt: new Date(Date.now() - 86400000).toISOString(),
+      updatedAt: new Date(Date.now() - 86400000).toISOString(),
+    }
+  ],
+  categories: ['Development', 'Design', 'Animation', 'Backend', 'Frontend'],
+  inviteCodes: [
+    {
+      code: 'WELCOME-2026',
+      createdAt: new Date().toISOString(),
+      expiresAt: null,
+      used: false,
+      usedBy: null,
+    }
+  ]
+}
+
+// Data migration/init
+function initDB() {
+  const blogs = localStorage.getItem(STORAGE_KEYS.BLOGS)
+  if (!blogs || blogs === '[]' || blogs === 'null' || blogs === 'undefined') {
+    localStorage.setItem(STORAGE_KEYS.BLOGS, JSON.stringify(INITIAL_DATA.blogs))
+  }
+
+  const categories = localStorage.getItem(STORAGE_KEYS.CATEGORIES)
+  if (!categories || categories === '[]' || categories === 'null' || categories === 'undefined') {
+    localStorage.setItem(STORAGE_KEYS.CATEGORIES, JSON.stringify(INITIAL_DATA.categories))
+  }
+
+  const codes = localStorage.getItem(STORAGE_KEYS.INVITE_CODES)
+  if (!codes || codes === '[]' || codes === 'null' || codes === 'undefined') {
+    localStorage.setItem(STORAGE_KEYS.INVITE_CODES, JSON.stringify(INITIAL_DATA.inviteCodes))
+  }
 }
 
 function generateSlug(title) {
@@ -218,5 +312,7 @@ function generateInviteCode() {
   }
   return code
 }
+
+initDB()
 
 export default db

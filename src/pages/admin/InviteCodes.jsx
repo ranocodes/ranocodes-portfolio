@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Plus, Copy, Trash2, Check, Clock, User, Ticket } from 'lucide-react'
 import db from '../../services/database'
 import DeleteModal from '../../components/admin/DeleteModal'
@@ -8,13 +8,17 @@ function InviteCodes() {
   const [copied, setCopied] = useState(null)
   const [deleteModal, setDeleteModal] = useState({ open: false, code: null })
 
-  useEffect(() => {
-    setCodes(db.inviteCodes.getAll())
+  const fetchCodes = useCallback(() => {
+    setCodes(db.inviteCodes.getAll() || [])
   }, [])
+
+  useEffect(() => {
+    fetchCodes()
+  }, [fetchCodes])
 
   const handleGenerate = () => {
     const newCode = db.inviteCodes.generate()
-    setCodes(db.inviteCodes.getAll())
+    fetchCodes()
     setCopied(newCode.code)
     setTimeout(() => setCopied(null), 2000)
   }
@@ -32,7 +36,7 @@ function InviteCodes() {
   const handleDelete = () => {
     if (deleteModal.code) {
       db.inviteCodes.delete(deleteModal.code)
-      setCodes(db.inviteCodes.getAll())
+      fetchCodes()
       setDeleteModal({ open: false, code: null })
     }
   }

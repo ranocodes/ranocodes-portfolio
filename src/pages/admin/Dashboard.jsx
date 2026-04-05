@@ -1,11 +1,26 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FileText, FolderOpen, Send, TrendingUp, Clock, Plus, ArrowRight } from 'lucide-react'
 import db from '../../services/database'
 
 function Dashboard() {
-  const blogs = db.blogs.getAll()
-  const categories = db.categories.getAll()
-  const activities = db.activity.getAll(10)
+  const [data, setData] = useState({
+    blogs: [],
+    categories: [],
+    activities: [],
+    loading: true
+  })
+
+  useEffect(() => {
+    const blogs = db.blogs.getAll()
+    const categories = db.categories.getAll()
+    const activities = db.activity.getAll(10)
+    setData({ blogs, categories, activities, loading: false })
+  }, [])
+
+  const { blogs, categories, activities, loading } = data
+
+  if (loading) return null
 
   const stats = [
     {
@@ -92,8 +107,8 @@ function Dashboard() {
                   </div>
                   <span
                     className={`px-3 py-1 text-xs font-bold rounded-full ${blog.status === 'published'
-                        ? 'bg-emerald-500/20 text-emerald-400'
-                        : 'bg-amber-500/20 text-amber-400'
+                      ? 'bg-emerald-500/20 text-emerald-400'
+                      : 'bg-amber-500/20 text-amber-400'
                       }`}
                   >
                     {blog.status}
@@ -122,10 +137,10 @@ function Dashboard() {
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-ivory font-medium leading-relaxed">
                       <span className="text-champagne font-bold capitalize">{activity.action}</span>{' '}
-                      <span className="capitalize text-ivory/90">{activity.type}</span>: <span className="text-ivory">{activity.itemName}</span>
+                      <span className="capitalize text-ivory/90">{activity.type}</span>: <span className="text-ivory">{activity.itemName || 'Unnamed Item'}</span>
                     </p>
                     <p className="text-xs text-ivory/60 font-mono mt-1">
-                      {formatTimeAgo(activity.timestamp)}
+                      {activity.timestamp ? formatTimeAgo(activity.timestamp) : 'Some time ago'}
                     </p>
                   </div>
                 </div>

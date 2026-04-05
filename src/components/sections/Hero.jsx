@@ -59,11 +59,11 @@ function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pb-20 md:pb-32">
         <div className="max-w-4xl">
-          <p className="hero-line font-mono text-champagne text-xs md:text-sm uppercase tracking-[0.3em] mb-6 opacity-0">
+          <p className="hero-line font-mono text-champagne text-xs md:text-sm uppercase tracking-[0.3em] mb-6 opacity-0 md:pt-16">
             Creative Developer & Designer
           </p>
 
-          <h1 className="hero-line text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-bold leading-[1.1] md:leading-[0.95] tracking-tight mb-8 opacity-0">
+          <h1 className="hero-line text-7xl sm:text-8xl md:text-8xl lg:text-[10rem] font-sans font-bold leading-[0.95] tracking-tight mb-8 opacity-0">
             <span className="block">Digital</span>
             <span className="block font-serif italic text-champagne">Craftsmanship</span>
             <span className="block">Meets</span>

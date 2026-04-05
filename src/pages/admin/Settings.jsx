@@ -5,13 +5,23 @@ import { User, Lock, Save, Check } from 'lucide-react'
 function Settings() {
   const { user, updateProfile } = useAuth()
   const [formData, setFormData] = useState({
-    name: user?.name || '',
-    email: user?.email || '',
+    name: '',
+    email: '',
     currentPassword: '',
     newPassword: '',
     confirmPassword: '',
   })
   const [message, setMessage] = useState({ type: '', text: '' })
+
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        name: user.name || '',
+        email: user.email || '',
+      }))
+    }
+  }, [user])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -56,11 +66,10 @@ function Settings() {
 
       {message.text && (
         <div
-          className={`flex items-center gap-3 px-4 py-3 rounded-xl ${
-            message.type === 'success'
+          className={`flex items-center gap-3 px-4 py-3 rounded-xl ${message.type === 'success'
               ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
               : 'bg-red-500/10 text-red-400 border border-red-500/20'
-          }`}
+            }`}
         >
           {message.type === 'success' && <Check className="w-5 h-5" />}
           {message.text}

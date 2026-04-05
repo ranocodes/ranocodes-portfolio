@@ -1,19 +1,29 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { Plus, Search, Pencil, Trash2, Eye, Send } from 'lucide-react'
 import db from '../../services/database'
 import DeleteModal from '../../components/admin/DeleteModal'
 
 function BlogList() {
-  const [blogs, setBlogs] = useState(db.blogs.getAll())
+  const [blogs, setBlogs] = useState([])
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
   const [deleteModal, setDeleteModal] = useState({ open: false, blog: null })
 
+  const fetchBlogs = useCallback(() => {
+    setBlogs(db.blogs.getAll())
+  }, [])
+
+  useEffect(() => {
+    fetchBlogs()
+  }, [fetchBlogs])
+
   const filteredBlogs = useMemo(() => {
     return blogs.filter(blog => {
-      const matchesSearch = blog.title.toLowerCase().includes(search.toLowerCase()) ||
-        blog.excerpt.toLowerCase().includes(search.toLowerCase())
+      const title = blog.title || ''
+      const excerpt = blog.excerpt || ''
+      const matchesSearch = title.toLowerCase().includes(search.toLowerCase()) ||
+        excerpt.toLowerCase().includes(search.toLowerCase())
       const matchesFilter = filter === 'all' || blog.status === filter
       return matchesSearch && matchesFilter
     })
@@ -22,7 +32,7 @@ function BlogList() {
   const handleDelete = () => {
     if (deleteModal.blog) {
       db.blogs.delete(deleteModal.blog.id)
-      setBlogs(db.blogs.getAll())
+      fetchBlogs()
       setDeleteModal({ open: false, blog: null })
     }
   }
@@ -30,7 +40,7 @@ function BlogList() {
   const toggleStatus = (blog) => {
     const newStatus = blog.status === 'published' ? 'draft' : 'published'
     db.blogs.update(blog.id, { status: newStatus })
-    setBlogs(db.blogs.getAll())
+    fetchBlogs()
   }
 
   return (
@@ -65,11 +75,10 @@ function BlogList() {
             <button
               key={status}
               onClick={() => setFilter(status)}
-              className={`px-4 py-3 rounded-xl font-medium transition-colors capitalize ${
-                filter === status
-                  ? 'bg-champagne text-obsidian'
-                  : 'bg-obsidian/50 text-ivory/70 hover:text-ivory border border-ivory/10'
-              }`}
+              className={`px-4 py-3 rounded-xl font-medium transition-colors capitalize ${filter === status
+                ? 'bg-champagne text-obsidian'
+                : 'bg-obsidian/50 text-ivory/70 hover:text-ivory border border-ivory/10'
+                }`}
             >
               {status}
             </button>
@@ -115,11 +124,10 @@ function BlogList() {
                     </td>
                     <td className="px-6 py-4 hidden lg:table-cell">
                       <span
-                        className={`px-3 py-1 text-xs font-medium rounded-full ${
-                          blog.status === 'published'
-                            ? 'bg-emerald-500/20 text-emerald-400'
-                            : 'bg-amber-500/20 text-amber-400'
-                        }`}
+                        className={`px-3 py-1 text-xs font-medium rounded-full ${blog.status === 'published'
+                          ? 'bg-emerald-500/20 text-emerald-400'
+                          : 'bg-amber-500/20 text-amber-400'
+                          }`}
                       >
                         {blog.status}
                       </span>
