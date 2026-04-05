@@ -46,7 +46,7 @@ function Categories() {
   }
 
   const getCategoryCount = (category) => {
-    const blogs = db.blogs.getAll()
+    const blogs = db.blogs.getAll() || []
     return blogs.filter(b => b.category === category).length
   }
 

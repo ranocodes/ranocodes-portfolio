@@ -53,26 +53,6 @@ function PublicRoutes() {
   )
 }
 
-function AdminRoutes() {
-  return (
-    <ProtectedRoute>
-      <AdminLayout>
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route path="/" element={<AdminDashboard />} />
-            <Route path="/blogs" element={<AdminBlogList />} />
-            <Route path="/blogs/new" element={<AdminBlogForm />} />
-            <Route path="/blogs/:id/edit" element={<AdminBlogForm />} />
-            <Route path="/categories" element={<AdminCategories />} />
-            <Route path="/invite-codes" element={<AdminInviteCodes />} />
-            <Route path="/settings" element={<AdminSettings />} />
-          </Routes>
-        </Suspense>
-      </AdminLayout>
-    </ProtectedRoute>
-  )
-}
-
 function App() {
   return (
     <AuthProvider>
@@ -82,8 +62,27 @@ function App() {
         <Analytics />
         <ErrorBoundary>
           <Routes>
+            {/* Admin Login */}
             <Route path="/admin/login" element={<Login />} />
-            <Route path="/admin/*" element={<AdminRoutes />} />
+
+            {/* Admin Protected Routes */}
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <Suspense fallback={<LoadingFallback />}>
+                  <AdminLayout />
+                </Suspense>
+              </ProtectedRoute>
+            }>
+              <Route index element={<AdminDashboard />} />
+              <Route path="blogs" element={<AdminBlogList />} />
+              <Route path="blogs/new" element={<AdminBlogForm />} />
+              <Route path="blogs/:id/edit" element={<AdminBlogForm />} />
+              <Route path="categories" element={<AdminCategories />} />
+              <Route path="invite-codes" element={<AdminInviteCodes />} />
+              <Route path="settings" element={<AdminSettings />} />
+            </Route>
+
+            {/* Public Routes */}
             <Route path="/*" element={<PublicRoutes />} />
           </Routes>
         </ErrorBoundary>
