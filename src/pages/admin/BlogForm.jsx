@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
-import { ArrowLeft, Save, Eye, Image as ImageIcon } from 'lucide-react'
+import { ArrowLeft, Save, Eye, Image as ImageIcon, Check } from 'lucide-react'
 import db from '../../services/database'
 import MarkdownEditor from '../../components/admin/MarkdownEditor'
 
@@ -22,6 +22,7 @@ function BlogForm() {
   const [errors, setErrors] = useState({})
   const [saving, setSaving] = useState(false)
   const [newCategory, setNewCategory] = useState('')
+  const [saved, setSaved] = useState(false)
 
   useEffect(() => {
     setCategories(db.categories.getAll())
@@ -48,6 +49,7 @@ function BlogForm() {
     if (errors[name]) {
       setErrors({ ...errors, [name]: null })
     }
+    setSaved(false)
   }
 
   const validate = () => {
@@ -72,6 +74,7 @@ function BlogForm() {
       fullContent: content,
       readTime: calculateReadTime(content)
     })
+    setSaved(false)
   }
 
   const handleAddCategory = () => {
@@ -118,7 +121,7 @@ function BlogForm() {
       <div className="flex items-center justify-between mb-8">
         <Link
           to="/admin/blogs"
-          className="flex items-center gap-2 text-slate hover:text-ivory transition-colors"
+          className="flex items-center gap-2 text-ivory/70 hover:text-ivory transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
           Back to Posts
@@ -128,7 +131,7 @@ function BlogForm() {
           <button
             onClick={(e) => handleSubmit(e, false)}
             disabled={saving}
-            className="flex items-center gap-2 px-5 py-2.5 bg-slate/30 text-ivory font-medium rounded-xl hover:bg-slate/50 transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 px-5 py-2.5 bg-obsidian/50 border border-ivory/10 text-ivory font-medium rounded-xl hover:bg-ivory/10 transition-colors disabled:opacity-50"
           >
             <Save className="w-4 h-4" />
             {saving ? 'Saving...' : 'Save Draft'}
@@ -149,7 +152,7 @@ function BlogForm() {
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-8">
-        <div className="bg-slate/30 backdrop-blur-sm border border-ivory/10 rounded-2xl p-6 space-y-6">
+        <div className="bg-obsidian/50 border border-ivory/10 rounded-2xl p-6 space-y-6">
           <div>
             <label className="block text-sm font-medium text-ivory/80 mb-2">
               Title *
@@ -159,9 +162,9 @@ function BlogForm() {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className={`w-full px-4 py-3 bg-slate/30 border rounded-xl text-ivory placeholder:text-slate focus:outline-none focus:ring-2 transition-colors ${
+              className={`w-full px-4 py-3 bg-obsidian/50 border rounded-xl text-ivory placeholder:text-ivory/40 focus:outline-none focus:ring-1 transition-colors ${
                 errors.title 
-                  ? 'border-red-500/50 focus:ring-red-500/20' 
+                  ? 'border-red-500/50 focus:ring-red-500/20 focus:border-red-500/50' 
                   : 'border-ivory/10 focus:border-champagne/50 focus:ring-champagne/20'
               }`}
               placeholder="Enter post title..."
@@ -180,9 +183,9 @@ function BlogForm() {
               value={formData.excerpt}
               onChange={handleChange}
               rows={3}
-              className={`w-full px-4 py-3 bg-slate/30 border rounded-xl text-ivory placeholder:text-slate focus:outline-none focus:ring-2 resize-none transition-colors ${
+              className={`w-full px-4 py-3 bg-obsidian/50 border rounded-xl text-ivory placeholder:text-ivory/40 focus:outline-none focus:ring-1 resize-none transition-colors ${
                 errors.excerpt 
-                  ? 'border-red-500/50 focus:ring-red-500/20' 
+                  ? 'border-red-500/50 focus:ring-red-500/20 focus:border-red-500/50' 
                   : 'border-ivory/10 focus:border-champagne/50 focus:ring-champagne/20'
               }`}
               placeholder="Brief description of the post..."
@@ -201,7 +204,7 @@ function BlogForm() {
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-slate/30 border rounded-xl text-ivory focus:outline-none focus:ring-2 transition-colors ${
+                className={`w-full px-4 py-3 bg-obsidian/50 border rounded-xl text-ivory focus:outline-none focus:ring-1 transition-colors ${
                   errors.category 
                     ? 'border-red-500/50 focus:ring-red-500/20' 
                     : 'border-ivory/10 focus:border-champagne/50 focus:ring-champagne/20'
@@ -221,13 +224,14 @@ function BlogForm() {
                   type="text"
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddCategory())}
                   placeholder="Add new category..."
-                  className="flex-1 px-3 py-2 bg-slate/20 border border-ivory/10 rounded-lg text-ivory text-sm placeholder:text-slate focus:outline-none focus:border-champagne/50"
+                  className="flex-1 px-3 py-2 bg-obsidian/50 border border-ivory/10 rounded-lg text-ivory text-sm placeholder:text-ivory/40 focus:outline-none focus:border-champagne/50"
                 />
                 <button
                   type="button"
                   onClick={handleAddCategory}
-                  className="px-3 py-2 bg-champagne/10 text-champagne text-sm rounded-lg hover:bg-champagne/20 transition-colors"
+                  className="px-4 py-2 bg-champagne/10 text-champagne text-sm rounded-lg hover:bg-champagne/20 transition-colors"
                 >
                   Add
                 </button>
@@ -247,9 +251,9 @@ function BlogForm() {
                     className={`flex-1 px-4 py-3 rounded-xl font-medium capitalize transition-colors ${
                       formData.status === status
                         ? status === 'published'
-                          ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                          : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
-                        : 'bg-slate/30 text-slate border border-ivory/10'
+                          ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                          : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                        : 'bg-obsidian/50 text-ivory/70 border border-ivory/10'
                     }`}
                   >
                     {status}
@@ -264,13 +268,13 @@ function BlogForm() {
               Featured Image URL
             </label>
             <div className="relative">
-              <ImageIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate" />
+              <ImageIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ivory/40" />
               <input
                 type="url"
                 name="featuredImage"
                 value={formData.featuredImage}
                 onChange={handleChange}
-                className="w-full pl-12 pr-4 py-3 bg-slate/30 border border-ivory/10 rounded-xl text-ivory placeholder:text-slate focus:outline-none focus:border-champagne/50 focus:ring-2 focus:ring-champagne/20 transition-colors"
+                className="w-full pl-12 pr-4 py-3 bg-obsidian/50 border border-ivory/10 rounded-xl text-ivory placeholder:text-ivory/40 focus:outline-none focus:border-champagne/50 focus:ring-1 focus:ring-champagne/20 transition-colors"
                 placeholder="https://example.com/image.jpg"
               />
             </div>
@@ -292,7 +296,7 @@ function BlogForm() {
             <label className="block text-sm font-medium text-ivory/80">
               Content * (Markdown)
             </label>
-            <span className="text-sm text-slate">
+            <span className="text-sm text-ivory/50">
               Read time: {formData.readTime}
             </span>
           </div>

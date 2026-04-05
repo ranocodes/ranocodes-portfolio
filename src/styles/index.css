@@ -44,8 +44,9 @@
   }
   
   .magnetic-btn .btn-bg {
-    @apply absolute inset-0 bg-champagne transition-transform duration-300 ease-out;
+    @apply absolute inset-0 transition-transform duration-300 ease-out;
     transform: translateX(-100%);
+    background: linear-gradient(135deg, #C9A84C 0%, #D4B55A 100%);
   }
   
   .magnetic-btn:hover .btn-bg {
@@ -53,7 +54,11 @@
   }
   
   .card-base {
-    @apply bg-ivory/5 backdrop-blur-sm border border-ivory/10 rounded-[2rem] shadow-2xl;
+    @apply bg-ivory/[3%] backdrop-blur-sm border border-ivory/10 rounded-[2rem] shadow-2xl;
+  }
+  
+  .card-hover {
+    @apply hover:border-champagne/30 hover:shadow-xl hover:shadow-champagne/5 transition-all duration-300;
   }
   
   .text-gradient {
@@ -82,7 +87,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate rounded-full;
+  @apply bg-slate/50 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {

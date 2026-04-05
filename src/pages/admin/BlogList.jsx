@@ -1,16 +1,14 @@
 import { useState, useMemo } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Plus, Search, Pencil, Trash2, Eye, MoreHorizontal, Send } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Plus, Search, Pencil, Trash2, Eye, Send } from 'lucide-react'
 import db from '../../services/database'
 import DeleteModal from '../../components/admin/DeleteModal'
 
 function BlogList() {
-  const navigate = useNavigate()
   const [blogs, setBlogs] = useState(db.blogs.getAll())
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
   const [deleteModal, setDeleteModal] = useState({ open: false, blog: null })
-  const [activeMenu, setActiveMenu] = useState(null)
 
   const filteredBlogs = useMemo(() => {
     return blogs.filter(blog => {
@@ -33,7 +31,6 @@ function BlogList() {
     const newStatus = blog.status === 'published' ? 'draft' : 'published'
     db.blogs.update(blog.id, { status: newStatus })
     setBlogs(db.blogs.getAll())
-    setActiveMenu(null)
   }
 
   return (
@@ -41,7 +38,7 @@ function BlogList() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-ivory mb-2">Blog Posts</h1>
-          <p className="text-slate">{filteredBlogs.length} posts total</p>
+          <p className="text-ivory/60">{filteredBlogs.length} posts total</p>
         </div>
         <Link
           to="/admin/blogs/new"
@@ -54,13 +51,13 @@ function BlogList() {
 
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ivory/40" />
           <input
             type="text"
             placeholder="Search posts..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-slate/30 border border-ivory/10 rounded-xl text-ivory placeholder:text-slate focus:outline-none focus:border-champagne/50 transition-colors"
+            className="w-full pl-12 pr-4 py-3 bg-obsidian/50 border border-ivory/10 rounded-xl text-ivory placeholder:text-ivory/40 focus:outline-none focus:border-champagne/50 transition-colors"
           />
         </div>
         <div className="flex gap-2">
@@ -71,7 +68,7 @@ function BlogList() {
               className={`px-4 py-3 rounded-xl font-medium transition-colors capitalize ${
                 filter === status
                   ? 'bg-champagne text-obsidian'
-                  : 'bg-slate/30 text-slate hover:text-ivory'
+                  : 'bg-obsidian/50 text-ivory/70 hover:text-ivory border border-ivory/10'
               }`}
             >
               {status}
@@ -80,14 +77,11 @@ function BlogList() {
         </div>
       </div>
 
-      <div className="bg-slate/30 backdrop-blur-sm border border-ivory/10 rounded-2xl overflow-hidden">
+      <div className="bg-obsidian/50 border border-ivory/10 rounded-2xl overflow-hidden">
         {filteredBlogs.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-slate mb-4">No posts found</p>
-            <Link
-              to="/admin/blogs/new"
-              className="text-champagne hover:underline"
-            >
+            <p className="text-ivory/60 mb-4">No posts found</p>
+            <Link to="/admin/blogs/new" className="text-champagne hover:underline">
               Create your first post
             </Link>
           </div>
@@ -96,25 +90,22 @@ function BlogList() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-ivory/10">
-                  <th className="text-left px-6 py-4 text-sm font-semibold text-slate">Post</th>
-                  <th className="text-left px-6 py-4 text-sm font-semibold text-slate hidden md:table-cell">Category</th>
-                  <th className="text-left px-6 py-4 text-sm font-semibold text-slate hidden lg:table-cell">Status</th>
-                  <th className="text-left px-6 py-4 text-sm font-semibold text-slate hidden sm:table-cell">Date</th>
-                  <th className="text-right px-6 py-4 text-sm font-semibold text-slate">Actions</th>
+                  <th className="text-left px-6 py-4 text-xs font-semibold text-ivory/50 uppercase tracking-wider">Post</th>
+                  <th className="text-left px-6 py-4 text-xs font-semibold text-ivory/50 uppercase tracking-wider hidden md:table-cell">Category</th>
+                  <th className="text-left px-6 py-4 text-xs font-semibold text-ivory/50 uppercase tracking-wider hidden lg:table-cell">Status</th>
+                  <th className="text-left px-6 py-4 text-xs font-semibold text-ivory/50 uppercase tracking-wider hidden sm:table-cell">Date</th>
+                  <th className="text-right px-6 py-4 text-xs font-semibold text-ivory/50 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredBlogs.map((blog) => (
-                  <tr key={blog.id} className="border-b border-ivory/5 hover:bg-ivory/5 transition-colors">
+                  <tr key={blog.id} className="border-b border-ivory/5 hover:bg-ivory/[3%] transition-colors">
                     <td className="px-6 py-4">
-                      <Link
-                        to={`/admin/blogs/${blog.id}/edit`}
-                        className="block"
-                      >
+                      <Link to={`/admin/blogs/${blog.id}/edit`} className="block">
                         <p className="font-medium text-ivory hover:text-champagne transition-colors">
                           {blog.title}
                         </p>
-                        <p className="text-sm text-slate line-clamp-1">{blog.excerpt}</p>
+                        <p className="text-sm text-ivory/50 line-clamp-1">{blog.excerpt}</p>
                       </Link>
                     </td>
                     <td className="px-6 py-4 hidden md:table-cell">
@@ -126,35 +117,35 @@ function BlogList() {
                       <span
                         className={`px-3 py-1 text-xs font-medium rounded-full ${
                           blog.status === 'published'
-                            ? 'bg-green-500/10 text-green-400'
-                            : 'bg-yellow-500/10 text-yellow-400'
+                            ? 'bg-emerald-500/20 text-emerald-400'
+                            : 'bg-amber-500/20 text-amber-400'
                         }`}
                       >
                         {blog.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm text-slate hidden sm:table-cell">
+                    <td className="px-6 py-4 text-sm text-ivory/50 hidden sm:table-cell">
                       {new Date(blog.createdAt).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex items-center justify-end gap-2">
+                      <div className="flex items-center justify-end gap-1">
                         <button
                           onClick={() => toggleStatus(blog)}
-                          className="p-2 text-slate hover:text-ivory hover:bg-ivory/10 rounded-lg transition-colors"
+                          className="p-2 text-ivory/50 hover:text-ivory hover:bg-ivory/10 rounded-lg transition-colors"
                           title={blog.status === 'published' ? 'Unpublish' : 'Publish'}
                         >
                           {blog.status === 'published' ? <Eye className="w-4 h-4" /> : <Send className="w-4 h-4" />}
                         </button>
                         <Link
                           to={`/admin/blogs/${blog.id}/edit`}
-                          className="p-2 text-slate hover:text-champagne hover:bg-champagne/10 rounded-lg transition-colors"
+                          className="p-2 text-ivory/50 hover:text-champagne hover:bg-champagne/10 rounded-lg transition-colors"
                           title="Edit"
                         >
                           <Pencil className="w-4 h-4" />
                         </Link>
                         <button
                           onClick={() => setDeleteModal({ open: true, blog })}
-                          className="p-2 text-slate hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                          className="p-2 text-ivory/50 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
                           title="Delete"
                         >
                           <Trash2 className="w-4 h-4" />
