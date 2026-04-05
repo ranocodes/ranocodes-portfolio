@@ -101,11 +101,11 @@ function FeatureCard({ feature, index }) {
               key={i}
               className={cn(
                 'flex items-center gap-3 transition-all duration-500',
-                i === activeIndex ? 'text-champagne translate-x-2' : 'text-slate/50'
+                i === activeIndex ? 'text-champagne translate-x-2' : 'text-ivory/40'
               )}
             >
               <div className="w-1.5 h-1.5 rounded-full bg-current" />
-              <span className="text-sm">{highlight}</span>
+              <span className="text-sm font-medium">{highlight}</span>
             </div>
           ))}
         </div>

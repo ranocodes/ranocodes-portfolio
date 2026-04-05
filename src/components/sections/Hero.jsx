@@ -44,49 +44,54 @@ function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-[100dvh] flex items-end overflow-hidden"
     >
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1920&q=80"
-          alt=""
+          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80"
+          alt="Abstract 3D Background"
           className="w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/70 to-obsidian/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/60 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-32 md:py-0">
-        <div className="md:absolute md:bottom-32 md:left-0 md:right-0">
-          <p className="hero-line font-mono text-champagne text-sm uppercase tracking-widest mb-6 opacity-0">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pb-20 md:pb-32">
+        <div className="max-w-4xl">
+          <p className="hero-line font-mono text-champagne text-xs md:text-sm uppercase tracking-[0.3em] mb-6 opacity-0">
             Creative Developer & Designer
           </p>
           
-          <h1 className="hero-line text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-bold leading-[0.95] tracking-tight mb-8 opacity-0">
+          <h1 className="hero-line text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-sans font-bold leading-[0.85] tracking-tight mb-8 opacity-0">
             <span className="block">Digital</span>
             <span className="block font-serif italic text-champagne">Craftsmanship</span>
             <span className="block">Meets</span>
-            <span className="block font-serif italic">Innovation.</span>
+            <span className="block font-serif italic text-ivory">Innovation.</span>
           </h1>
 
-          <p className="hero-sub text-lg md:text-xl text-ivory/70 max-w-xl mb-10 opacity-0">
-            Custom web design, front-end/back-end development, and e-commerce solutions 
-            that elevate brands and drive results.
+          <p className="hero-sub text-lg md:text-xl lg:text-2xl text-ivory/60 max-w-xl mb-12 leading-relaxed opacity-0">
+            I build high-fidelity digital experiences where
+            <span className="text-ivory"> precision</span> meets
+            <span className="text-ivory"> soul</span>. Custom solutions that elevate your brand.
           </p>
 
-          <div className="hero-cta flex flex-wrap gap-4 opacity-0">
-            <MagneticButton href="/projects" size="lg">
-              View Projects
+          <div className="hero-cta flex flex-wrap gap-6 opacity-0">
+            <MagneticButton href="/projects" size="lg" className="px-8 py-4">
+              Explore Work
             </MagneticButton>
-            <MagneticButton href="/#contact" variant="secondary" size="lg">
+            <MagneticButton href="/#contact" variant="secondary" size="lg" className="px-8 py-4">
               Get in Touch
             </MagneticButton>
           </div>
         </div>
       </div>
 
-      <div className="hero-scroll absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0">
-        <span className="font-mono text-xs text-ivory/50 uppercase tracking-widest">Scroll</span>
-        <ArrowDown className="w-5 h-5 text-champagne animate-bounce" />
+      <div className="hero-scroll absolute bottom-10 right-10 hidden md:flex flex-col items-center gap-4 opacity-0">
+        <div className="w-[1px] h-24 bg-gradient-to-b from-champagne to-transparent" />
+        <span className="font-mono text-[10px] text-ivory/40 uppercase tracking-[0.4em] [writing-mode:vertical-lr]">
+          Scroll to explore
+        </span>
       </div>
     </section>
   )

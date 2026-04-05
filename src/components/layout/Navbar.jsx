@@ -50,16 +50,28 @@ function Navbar() {
     <>
       <nav
         ref={navRef}
-        className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[calc(100%-2rem)] md:w-auto ${
-          isScrolled
+        className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[calc(100%-2rem)] md:w-auto ${isScrolled
             ? 'bg-obsidian/80 backdrop-blur-xl border border-ivory/10 shadow-2xl'
             : 'bg-obsidian/40 backdrop-blur-md border border-ivory/10'
-        } rounded-full`}
+          } rounded-full`}
       >
-        <div className="flex items-center px-2 py-2">
+        <div className="flex items-center w-full px-2 py-2">
+          {/* Mobile Menu Button - Moved to left */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2.5 mr-1 rounded-full text-ivory hover:bg-ivory/10 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
+          </button>
+
           <Link
             to="/"
-            className="px-4 py-2.5 font-semibold text-sm text-ivory tracking-tight transition-colors duration-300 hover:text-champagne"
+            className="px-4 py-2.5 font-semibold text-sm text-ivory tracking-tight transition-colors duration-300 hover:text-champagne md:mr-auto"
           >
             Portfolio
           </Link>
@@ -69,11 +81,10 @@ function Navbar() {
               <Link
                 key={link.href}
                 to={link.href}
-                className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${
-                  isActive(link.href)
+                className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${isActive(link.href)
                     ? 'bg-ivory/10 text-champagne'
                     : 'text-ivory/80 hover:text-ivory hover:bg-ivory/5'
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>
@@ -88,18 +99,6 @@ function Navbar() {
               Contact
             </Link>
           </div>
-
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2.5 ml-1 rounded-full text-ivory hover:bg-ivory/10 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
-          </button>
         </div>
       </nav>
 
@@ -111,9 +110,8 @@ function Navbar() {
                 key={link.href}
                 to={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-3xl font-serif italic transition-colors duration-300 ${
-                  isActive(link.href) ? 'text-champagne' : 'text-ivory'
-                }`}
+                className={`text-3xl font-serif italic transition-colors duration-300 ${isActive(link.href) ? 'text-champagne' : 'text-ivory'
+                  }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {link.label}
