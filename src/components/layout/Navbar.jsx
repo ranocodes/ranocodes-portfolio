@@ -51,53 +51,54 @@ function Navbar() {
       <nav
         ref={navRef}
         className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[calc(100%-2rem)] md:w-auto ${isScrolled
-            ? 'bg-obsidian/80 backdrop-blur-xl border border-ivory/10 shadow-2xl'
-            : 'bg-obsidian/40 backdrop-blur-md border border-ivory/10'
+          ? 'bg-obsidian/80 backdrop-blur-xl border border-ivory/10 shadow-2xl'
+          : 'bg-obsidian/40 backdrop-blur-md border border-ivory/10'
           } rounded-full`}
       >
-        <div className="flex items-center w-full px-2 py-2">
-          {/* Mobile Menu Button - Moved to left */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2.5 mr-1 rounded-full text-ivory hover:bg-ivory/10 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
-          </button>
-
+        <div className="flex items-center justify-between w-full px-2 py-2">
           <Link
             to="/"
-            className="px-4 py-2.5 font-semibold text-sm text-ivory tracking-tight transition-colors duration-300 hover:text-champagne md:mr-auto"
+            className="px-4 py-2.5 font-semibold text-sm text-ivory tracking-tight transition-colors duration-300 hover:text-champagne"
           >
             Portfolio
           </Link>
 
-          <div className="hidden md:flex items-center gap-1 px-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${isActive(link.href)
+          <div className="flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-1 px-2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${isActive(link.href)
                     ? 'bg-ivory/10 text-champagne'
                     : 'text-ivory/80 hover:text-ivory hover:bg-ivory/5'
-                  }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+                    }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
 
-          <div className="hidden md:block ml-2">
-            <Link
-              to="/#contact"
-              className="inline-block px-5 py-2.5 bg-champagne text-obsidian text-sm font-semibold rounded-full hover:bg-champagne/90 transition-colors"
+            <div className="hidden md:block ml-2">
+              <Link
+                to="/#contact"
+                className="inline-block px-5 py-2.5 bg-champagne text-obsidian text-sm font-semibold rounded-full hover:bg-champagne/90 transition-colors"
+              >
+                Contact
+              </Link>
+            </div>
+
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2.5 rounded-full text-ivory hover:bg-ivory/10 transition-colors"
+              aria-label="Toggle menu"
             >
-              Contact
-            </Link>
+              {isMobileMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
+            </button>
           </div>
         </div>
       </nav>
