@@ -2,9 +2,8 @@ import SEO, { ProjectSchema } from '../components/SEO'
 import { useEffect, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { gsap } from 'gsap'
-import { ArrowLeft, CheckCircle } from 'lucide-react'
+import { ArrowLeft, CheckCircle, ExternalLink } from 'lucide-react'
 import Badge from '../components/ui/Badge'
-import Card from '../components/ui/Card'
 import MagneticButton from '../components/ui/MagneticButton'
 import projectsData from '../data/projects.json'
 
@@ -49,12 +48,12 @@ function ProjectDetail() {
       />
       {project && <ProjectSchema project={project} />}
       <main ref={sectionRef} className="min-h-screen pt-32 pb-20">
-        <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20">
+        <div className="max-w-6xl mx-auto px-6">
           <Link
             to="/projects"
-            className="project-content inline-flex items-center gap-2 text-slate hover:text-champagne transition-colors mb-12"
+            className="project-content inline-flex items-center gap-2 text-ivory/70 hover:text-champagne transition-colors mb-12"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to Projects
+            <ArrowLeft className="w-5 h-5" /> Back to Projects
           </Link>
 
           <div className="project-content mb-12">
@@ -64,12 +63,12 @@ function ProjectDetail() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif italic mb-6">
               {project.title}
             </h1>
-            <p className="text-xl text-ivory/70 max-w-3xl leading-relaxed">
+            <p className="text-lg md:text-xl text-ivory/70 max-w-3xl leading-relaxed">
               {project.overview}
             </p>
           </div>
 
-          <div className="aspect-[16/9] rounded-[2rem] overflow-hidden mb-16 project-content">
+          <div className="aspect-video rounded-[2rem] overflow-hidden mb-16 project-content">
             <img
               src={project.screenshots[0]}
               alt={project.title}
@@ -77,43 +76,48 @@ function ProjectDetail() {
             />
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
             {project.results.map((result, index) => (
-              <Card key={index} className="project-content text-center">
-                <p className="text-4xl font-bold text-champagne mb-2">{result.value}</p>
-                <p className="text-slate text-sm">{result.metric}</p>
-              </Card>
+              <div
+                key={index}
+                className="project-content group bg-gradient-to-br from-ivory/[3%] to-ivory/[1%] border border-ivory/10 rounded-2xl p-8 text-center hover:border-champagne/30 hover:shadow-xl hover:shadow-champagne/5 transition-all duration-300"
+              >
+                <p className="text-4xl md:text-5xl font-bold text-champagne mb-3">{result.value}</p>
+                <p className="text-sm text-ivory/60 font-medium uppercase tracking-wider">{result.metric}</p>
+              </div>
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
-            <Card className="project-content">
-              <h2 className="text-2xl font-semibold mb-4 text-champagne">The Challenge</h2>
-              <p className="text-slate leading-relaxed">{project.problem}</p>
-            </Card>
-            <Card className="project-content">
-              <h2 className="text-2xl font-semibold mb-4 text-champagne">The Mission</h2>
-              <p className="text-slate leading-relaxed">{project.mission}</p>
-            </Card>
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            <div className="project-content bg-ivory/[3%] border border-ivory/10 rounded-2xl p-8">
+              <h2 className="text-xl md:text-2xl font-semibold mb-4 text-champagne">The Challenge</h2>
+              <p className="text-ivory/80 leading-relaxed">{project.problem}</p>
+            </div>
+            <div className="project-content bg-ivory/[3%] border border-ivory/10 rounded-2xl p-8">
+              <h2 className="text-xl md:text-2xl font-semibold mb-4 text-champagne">The Mission</h2>
+              <p className="text-ivory/80 leading-relaxed">{project.mission}</p>
+            </div>
           </div>
 
-          <Card className="project-content mb-16">
-            <h2 className="text-2xl font-semibold mb-6 text-champagne">The Solution</h2>
-            <p className="text-slate leading-relaxed mb-8">{project.solution}</p>
+          <div className="project-content bg-ivory/[3%] border border-ivory/10 rounded-2xl p-8 mb-16">
+            <h2 className="text-xl md:text-2xl font-semibold mb-6 text-champagne">The Solution</h2>
+            <p className="text-ivory/80 leading-relaxed mb-8">{project.solution}</p>
 
-            <h3 className="text-lg font-semibold mb-4">Key Features</h3>
+            <h3 className="text-lg font-semibold mb-4 text-ivory">Key Features</h3>
             <div className="grid sm:grid-cols-2 gap-4">
               {project.features.map((feature, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-champagne flex-shrink-0" />
+                  <div className="w-6 h-6 rounded-full bg-champagne/20 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="w-4 h-4 text-champagne" />
+                  </div>
                   <span className="text-ivory/80">{feature}</span>
                 </div>
               ))}
             </div>
-          </Card>
+          </div>
 
-          <Card className="project-content mb-16">
-            <h2 className="text-2xl font-semibold mb-6 text-champagne">Tech Stack</h2>
+          <div className="project-content bg-ivory/[3%] border border-ivory/10 rounded-2xl p-8 mb-16">
+            <h2 className="text-xl md:text-2xl font-semibold mb-6 text-champagne">Tech Stack</h2>
             <div className="flex flex-wrap gap-3">
               {project.techStack.map((tech) => (
                 <Badge key={tech} variant="primary">
@@ -121,14 +125,15 @@ function ProjectDetail() {
                 </Badge>
               ))}
             </div>
-          </Card>
+          </div>
 
-          <div className="project-content text-center">
-            <h2 className="text-3xl font-serif italic mb-8">
+          <div className="project-content text-center py-12">
+            <h2 className="text-3xl md:text-4xl font-serif italic mb-8">
               Like what you see? <span className="text-champagne">Let's talk</span>
             </h2>
             <MagneticButton href="/#contact" size="lg">
               Start a Project
+              <ExternalLink className="w-5 h-5" />
             </MagneticButton>
           </div>
         </div>

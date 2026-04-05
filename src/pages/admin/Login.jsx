@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import { Eye, EyeOff, Lock, Mail, User, Ticket } from 'lucide-react'
+import { Eye, EyeOff, Lock, Mail, Ticket } from 'lucide-react'
 
 function Login() {
   const navigate = useNavigate()
@@ -70,7 +70,7 @@ function Login() {
           <h1 className="text-3xl font-bold text-ivory mb-2">
             {isLogin ? 'Welcome back' : 'Create account'}
           </h1>
-          <p className="text-slate">
+          <p className="text-ivory/60">
             {isLogin
               ? 'Sign in to access the admin dashboard'
               : 'Join the team to manage content'}
@@ -94,13 +94,13 @@ function Login() {
               Email
             </label>
             <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate" />
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ivory/40" />
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full pl-12 pr-4 py-3.5 bg-slate/30 border border-ivory/10 rounded-xl text-ivory placeholder:text-slate focus:outline-none focus:border-champagne/50 focus:ring-2 focus:ring-champagne/20 transition-all"
+                className="w-full pl-12 pr-4 py-3.5 bg-obsidian/50 border border-ivory/10 rounded-xl text-ivory placeholder:text-ivory/40 focus:outline-none focus:border-champagne/50 transition-colors"
                 placeholder="you@example.com"
                 required
               />
@@ -113,13 +113,13 @@ function Login() {
                 Invite Code
               </label>
               <div className="relative">
-                <Ticket className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate" />
+                <Ticket className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ivory/40" />
                 <input
                   type="text"
                   name="inviteCode"
                   value={formData.inviteCode}
                   onChange={handleChange}
-                  className="w-full pl-12 pr-4 py-3.5 bg-slate/30 border border-ivory/10 rounded-xl text-ivory placeholder:text-slate focus:outline-none focus:border-champagne/50 focus:ring-2 focus:ring-champagne/20 transition-all font-mono uppercase"
+                  className="w-full pl-12 pr-4 py-3.5 bg-obsidian/50 border border-ivory/10 rounded-xl text-ivory placeholder:text-ivory/40 focus:outline-none focus:border-champagne/50 transition-colors font-mono uppercase"
                   placeholder="XXXXXXXX"
                   maxLength={8}
                 />
@@ -132,13 +132,13 @@ function Login() {
               Password
             </label>
             <div className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate" />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ivory/40" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full pl-12 pr-12 py-3.5 bg-slate/30 border border-ivory/10 rounded-xl text-ivory placeholder:text-slate focus:outline-none focus:border-champagne/50 focus:ring-2 focus:ring-champagne/20 transition-all"
+                className="w-full pl-12 pr-12 py-3.5 bg-obsidian/50 border border-ivory/10 rounded-xl text-ivory placeholder:text-ivory/40 focus:outline-none focus:border-champagne/50 transition-colors"
                 placeholder="••••••••"
                 required
                 minLength={8}
@@ -146,7 +146,7 @@ function Login() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate hover:text-ivory transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-ivory/40 hover:text-ivory transition-colors"
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
@@ -159,13 +159,13 @@ function Login() {
                 Confirm Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate" />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ivory/40" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="w-full pl-12 pr-4 py-3.5 bg-slate/30 border border-ivory/10 rounded-xl text-ivory placeholder:text-slate focus:outline-none focus:border-champagne/50 focus:ring-2 focus:ring-champagne/20 transition-all"
+                  className="w-full pl-12 pr-4 py-3.5 bg-obsidian/50 border border-ivory/10 rounded-xl text-ivory placeholder:text-ivory/40 focus:outline-none focus:border-champagne/50 transition-colors"
                   placeholder="••••••••"
                   required
                   minLength={8}

@@ -51,13 +51,13 @@ function Categories() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-ivory mb-2">Categories</h1>
-        <p className="text-slate">Manage your blog post categories</p>
+        <p className="text-ivory/60">Manage your blog post categories</p>
       </div>
 
-      <div className="bg-slate/30 backdrop-blur-sm border border-ivory/10 rounded-2xl p-6">
+      <div className="bg-obsidian/50 border border-ivory/10 rounded-2xl p-6">
         <div className="flex gap-3 mb-6">
           <input
             type="text"
@@ -65,7 +65,7 @@ function Categories() {
             onChange={(e) => setNewCategory(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
             placeholder="New category name..."
-            className="flex-1 px-4 py-3 bg-slate/30 border border-ivory/10 rounded-xl text-ivory placeholder:text-slate focus:outline-none focus:border-champagne/50 transition-colors"
+            className="flex-1 px-4 py-3 bg-obsidian/50 border border-ivory/10 rounded-xl text-ivory placeholder:text-ivory/40 focus:outline-none focus:border-champagne/50 transition-colors"
           />
           <button
             onClick={handleAdd}
@@ -80,14 +80,14 @@ function Categories() {
         <div className="space-y-2">
           {categories.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-slate">No categories yet</p>
-              <p className="text-sm text-slate/60 mt-1">Add your first category above</p>
+              <p className="text-ivory/60">No categories yet</p>
+              <p className="text-sm text-ivory/40 mt-1">Add your first category above</p>
             </div>
           ) : (
             categories.map((category) => (
               <div
                 key={category}
-                className="flex items-center justify-between p-4 rounded-xl bg-ivory/5 hover:bg-ivory/10 transition-colors group"
+                className="flex items-center justify-between p-4 rounded-xl bg-ivory/[3%] hover:bg-ivory/[5%] transition-colors group"
               >
                 {editing === category ? (
                   <div className="flex items-center gap-2 flex-1">
@@ -95,7 +95,7 @@ function Categories() {
                       id={`edit-${category}`}
                       type="text"
                       defaultValue={category}
-                      className="flex-1 px-3 py-2 bg-slate/30 border border-ivory/10 rounded-lg text-ivory focus:outline-none focus:border-champagne/50"
+                      className="flex-1 px-3 py-2 bg-obsidian/50 border border-ivory/10 rounded-lg text-ivory focus:outline-none focus:border-champagne/50"
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') handleEdit(category)
                         if (e.key === 'Escape') setEditing(null)
@@ -104,13 +104,13 @@ function Categories() {
                     />
                     <button
                       onClick={() => handleEdit(category)}
-                      className="p-2 bg-green-500/20 text-green-400 rounded-lg hover:bg-green-500/30 transition-colors"
+                      className="p-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors"
                     >
                       <Check className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => setEditing(null)}
-                      className="p-2 text-slate hover:text-ivory rounded-lg hover:bg-ivory/10 transition-colors"
+                      className="p-2 text-ivory/50 hover:text-ivory rounded-lg hover:bg-ivory/10 transition-colors"
                     >
                       <X className="w-4 h-4" />
                     </button>
@@ -119,20 +119,20 @@ function Categories() {
                   <>
                     <div className="flex items-center gap-4">
                       <span className="text-ivory font-medium">{category}</span>
-                      <span className="text-sm text-slate">
+                      <span className="text-sm text-ivory/50">
                         {getCategoryCount(category)} posts
                       </span>
                     </div>
                     <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={() => setEditing(category)}
-                        className="p-2 text-slate hover:text-champagne hover:bg-champagne/10 rounded-lg transition-colors"
+                        className="p-2 text-ivory/50 hover:text-champagne hover:bg-champagne/10 rounded-lg transition-colors"
                       >
                         <Pencil className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => setDeleteModal({ open: true, category })}
-                        className="p-2 text-slate hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                        className="p-2 text-ivory/50 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>

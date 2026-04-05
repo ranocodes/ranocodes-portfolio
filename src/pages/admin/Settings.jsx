@@ -51,14 +51,14 @@ function Settings() {
     <div className="space-y-8 max-w-2xl">
       <div>
         <h1 className="text-3xl font-bold text-ivory mb-2">Settings</h1>
-        <p className="text-slate">Manage your account settings</p>
+        <p className="text-ivory/60">Manage your account settings</p>
       </div>
 
       {message.text && (
         <div
           className={`flex items-center gap-3 px-4 py-3 rounded-xl ${
             message.type === 'success'
-              ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+              ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
               : 'bg-red-500/10 text-red-400 border border-red-500/20'
           }`}
         >
@@ -67,14 +67,14 @@ function Settings() {
         </div>
       )}
 
-      <div className="bg-slate/30 backdrop-blur-sm border border-ivory/10 rounded-2xl p-6">
+      <div className="bg-obsidian/50 border border-ivory/10 rounded-2xl p-6">
         <div className="flex items-center gap-4 mb-6">
           <div className="w-12 h-12 rounded-xl bg-champagne/10 flex items-center justify-center">
             <User className="w-6 h-6 text-champagne" />
           </div>
           <div>
             <h2 className="text-lg font-semibold text-ivory">Profile Information</h2>
-            <p className="text-sm text-slate">Update your personal details</p>
+            <p className="text-sm text-ivory/60">Update your personal details</p>
           </div>
         </div>
 
@@ -88,7 +88,7 @@ function Settings() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-slate/30 border border-ivory/10 rounded-xl text-ivory focus:outline-none focus:border-champagne/50 transition-colors"
+              className="w-full px-4 py-3 bg-obsidian/50 border border-ivory/10 rounded-xl text-ivory focus:outline-none focus:border-champagne/50 transition-colors"
             />
           </div>
 
@@ -101,9 +101,9 @@ function Settings() {
               name="email"
               value={formData.email}
               disabled
-              className="w-full px-4 py-3 bg-slate/20 border border-ivory/10 rounded-xl text-slate cursor-not-allowed"
+              className="w-full px-4 py-3 bg-obsidian/30 border border-ivory/10 rounded-xl text-ivory/50 cursor-not-allowed"
             />
-            <p className="mt-1 text-xs text-slate">Email cannot be changed</p>
+            <p className="mt-1 text-xs text-ivory/40">Email cannot be changed</p>
           </div>
 
           <button
@@ -116,14 +116,14 @@ function Settings() {
         </form>
       </div>
 
-      <div className="bg-slate/30 backdrop-blur-sm border border-ivory/10 rounded-2xl p-6">
+      <div className="bg-obsidian/50 border border-ivory/10 rounded-2xl p-6">
         <div className="flex items-center gap-4 mb-6">
           <div className="w-12 h-12 rounded-xl bg-champagne/10 flex items-center justify-center">
             <Lock className="w-6 h-6 text-champagne" />
           </div>
           <div>
             <h2 className="text-lg font-semibold text-ivory">Change Password</h2>
-            <p className="text-sm text-slate">Update your password</p>
+            <p className="text-sm text-ivory/60">Update your password</p>
           </div>
         </div>
 
@@ -137,7 +137,7 @@ function Settings() {
               name="currentPassword"
               value={formData.currentPassword}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-slate/30 border border-ivory/10 rounded-xl text-ivory focus:outline-none focus:border-champagne/50 transition-colors"
+              className="w-full px-4 py-3 bg-obsidian/50 border border-ivory/10 rounded-xl text-ivory focus:outline-none focus:border-champagne/50 transition-colors"
             />
           </div>
 
@@ -151,7 +151,7 @@ function Settings() {
               value={formData.newPassword}
               onChange={handleChange}
               minLength={8}
-              className="w-full px-4 py-3 bg-slate/30 border border-ivory/10 rounded-xl text-ivory focus:outline-none focus:border-champagne/50 transition-colors"
+              className="w-full px-4 py-3 bg-obsidian/50 border border-ivory/10 rounded-xl text-ivory focus:outline-none focus:border-champagne/50 transition-colors"
             />
           </div>
 
@@ -164,13 +164,13 @@ function Settings() {
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-slate/30 border border-ivory/10 rounded-xl text-ivory focus:outline-none focus:border-champagne/50 transition-colors"
+              className="w-full px-4 py-3 bg-obsidian/50 border border-ivory/10 rounded-xl text-ivory focus:outline-none focus:border-champagne/50 transition-colors"
             />
           </div>
 
           <button
             type="submit"
-            className="inline-flex items-center gap-2 px-5 py-3 bg-slate/50 text-ivory font-medium rounded-xl hover:bg-slate/70 transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-3 bg-ivory/10 text-ivory font-medium rounded-xl hover:bg-ivory/20 transition-colors"
           >
             <Lock className="w-4 h-4" />
             Update Password
