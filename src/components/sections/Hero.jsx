@@ -62,15 +62,15 @@ function Hero() {
           <p className="hero-line font-mono text-champagne text-xs md:text-sm uppercase tracking-[0.3em] mb-6 opacity-0">
             Creative Developer & Designer
           </p>
-          
-          <h1 className="hero-line text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-sans font-bold leading-[0.85] tracking-tight mb-8 opacity-0">
+
+          <h1 className="hero-line text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-bold leading-[1.1] md:leading-[0.95] tracking-tight mb-8 opacity-0">
             <span className="block">Digital</span>
             <span className="block font-serif italic text-champagne">Craftsmanship</span>
             <span className="block">Meets</span>
             <span className="block font-serif italic text-ivory">Innovation.</span>
           </h1>
 
-          <p className="hero-sub text-lg md:text-xl lg:text-2xl text-ivory/60 max-w-xl mb-12 leading-relaxed opacity-0">
+          <p className="hero-sub text-base md:text-lg lg:text-xl text-ivory/60 max-w-xl mb-12 leading-relaxed opacity-0">
             I build high-fidelity digital experiences where
             <span className="text-ivory"> precision</span> meets
             <span className="text-ivory"> soul</span>. Custom solutions that elevate your brand.
